@@ -17,16 +17,18 @@ class Atoi {
     private static final int NINE = 57;
 
     public int myAtoi(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
         StringBuilder input = new StringBuilder();
 
         for (char c : s.toCharArray()) {
             if (c != WHITESPACE) {
                 if (isNumber(c)) {
                     input.append(c);
-                } else if (isSign(c)) {
+                } else if (isSign(c) && input.length() == 0) {
                     input.append(c);
-                } else {
-                    
                 }
             }
         }

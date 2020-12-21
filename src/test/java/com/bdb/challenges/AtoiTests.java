@@ -28,4 +28,9 @@ public class AtoiTests {
         assertEquals(0, "words and 987");
     }
 
+    @Test
+    public void myAtoi_intRange() {
+        assertEquals(-2147483648, "-91283472332");
+    }
+
 }
