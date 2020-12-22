@@ -21,19 +21,35 @@ class Atoi {
             return 0;
         }
 
-        StringBuilder input = new StringBuilder();
+        int idx = 0;
 
-        for (char c : s.toCharArray()) {
-            if (c != WHITESPACE) {
-                if (isNumber(c)) {
-                    input.append(c);
-                } else if (isSign(c) && input.length() == 0) {
-                    input.append(c);
-                }
-            }
+        while (idx < s.length() && s.charAt(idx) == WHITESPACE) {
+            idx++;
         }
 
-        return transformNumber(input);
+        int sign = 1;
+
+        if (idx < s.length() && isSign(s.charAt(idx))) {
+            sign = (s.charAt(idx) == '-') ? -1 : 1;
+            idx++;
+        }
+
+        return transformNumber(s, idx, sign);
+    }
+
+    private int transformNumber(String s, int idx, int sign) {
+        int result = 0;
+        while (idx < s.length() && isNumber(s.charAt(idx))) {
+
+            if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && s.charAt(idx) - '0' > Integer.MAX_VALUE % 10)) {
+                return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+
+            result = (result * 10) + ((int) s.charAt(idx)) - ZERO;
+            idx++;
+        }
+
+        return result * sign;
     }
 
     private boolean isSign(char c) {
@@ -42,16 +58,6 @@ class Atoi {
 
     private boolean isNumber(char c) {
         return c >= ZERO && c <= NINE;
-    }
-
-    private int transformNumber(StringBuilder input) {
-        int result = 0;
-        for (int idx = 0; idx < input.length(); idx++) {
-            int number = (int) input.charAt(idx) - ZERO;
-            result = (result * 10) + number;
-        }
-
-        return result;
     }
 
 }

@@ -25,12 +25,12 @@ public class AtoiTests {
 
     @Test
     public void myAtoi_numberLast() {
-        assertEquals(0, "words and 987");
+        assertEquals(0, atoi.myAtoi("words and 987"));
     }
 
     @Test
     public void myAtoi_intRange() {
-        assertEquals(-2147483648, "-91283472332");
+        assertEquals(-2147483648, atoi.myAtoi("-91283472332"));
     }
 
 }
