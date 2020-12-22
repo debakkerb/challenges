@@ -53,7 +53,7 @@ class Atoi {
     }
 
     private int getNumber(String s, int idx) {
-        return s.charAt(idx) - '0';
+        return s.charAt(idx) - ZERO;
     }
 
     private boolean isSign(char c) {
