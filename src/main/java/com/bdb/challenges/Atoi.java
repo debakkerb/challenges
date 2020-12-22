@@ -40,16 +40,20 @@ class Atoi {
     private int transformNumber(String s, int idx, int sign) {
         int result = 0;
         while (idx < s.length() && isNumber(s.charAt(idx))) {
-
-            if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && s.charAt(idx) - '0' > Integer.MAX_VALUE % 10)) {
+            int digit = getNumber(s, idx);
+            if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && digit > Integer.MAX_VALUE % 10)) {
                 return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             }
 
-            result = (result * 10) + ((int) s.charAt(idx)) - ZERO;
+            result = (result * 10) + digit;
             idx++;
         }
 
         return result * sign;
+    }
+
+    private int getNumber(String s, int idx) {
+        return s.charAt(idx) - '0';
     }
 
     private boolean isSign(char c) {
